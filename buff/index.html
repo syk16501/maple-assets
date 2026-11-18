@@ -1489,6 +1489,7 @@ return ret;
     if (itemCatEl) { try { ITEM_CATALOG = JSON.parse(itemCatEl.textContent); } catch (e) {} }
 
     var ITEM_ICONS = {};
+    var ITEM_ICON_CACHE = {};
     var itemIconEl = document.getElementById('buff-item-icons');
     if (itemIconEl) { try { ITEM_ICONS = JSON.parse(itemIconEl.textContent); } catch (e) {} }
 
@@ -1590,18 +1591,17 @@ return ret;
           meta: { page: pagei, pageSize: sizei, total: totali, totalPages: Math.max(1, Math.ceil(totali / sizei)) }
         }));
       }
-      if (path.indexOf('/api/v1/buffs/item-icons/') === 0) {
-        var iid = path.slice('/api/v1/buffs/item-icons/'.length);
-        var b64 = ITEM_ICONS[String(iid)] || '';
-        if (!b64) return Promise.resolve(new Response('', { status: 404 }));
-        try {
-          var bin = atob(b64);
-          var arr = new Uint8Array(bin.length);
-          for (var bi = 0; bi < bin.length; bi++) arr[bi] = bin.charCodeAt(bi);
-          return Promise.resolve(new Response(new Blob([arr], { type: 'image/png' }), { status: 200 }));
-        } catch (e) {
-          return Promise.resolve(new Response('', { status: 500 }));
+      var mi = /^\/api\/v1\/buffs\/item-icons\/(\d+)$/.exec(path);
+      if (mi) {
+        var iid = mi[1];
+        if (!ITEM_ICONS[iid]) return Promise.resolve(new Response('', { status: 404 }));
+        if (!ITEM_ICON_CACHE[iid]) {
+          var ibin = atob(ITEM_ICONS[iid]);
+          var ibytes = new Uint8Array(ibin.length);
+          for (var ii = 0; ii < ibin.length; ii++) ibytes[ii] = ibin.charCodeAt(ii);
+          ITEM_ICON_CACHE[iid] = new Response(ibytes, { status: 200, headers: { 'content-type': 'image/png' } });
         }
+        return Promise.resolve(ITEM_ICON_CACHE[iid].clone());
       }
       if (path === '/api/v1/health' || path === '/api/v1/rank/health') return Promise.resolve(jsonResponse({ ok: true }));
       if (path === '/api/v1/ads') return Promise.resolve(jsonResponse({ items: [] }));
