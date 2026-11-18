@@ -1842,6 +1842,14 @@ Arrows appear at 4% and hide 1.5s after returning to 2%, with recognition-delay 
       return Promise.resolve(new Response(body, { status: 200, headers: { 'Content-Type': 'application/json' } }));
     }
 
+    /* 道具图标：直连枫记 CDN（避免相对路径打到 jsDelivr 404） */
+    var mIcon = full.match(/\/api\/v1\/buffs\/item-icons\/([0-9]+)/);
+    if (mIcon) { return origFetch.call(this, ITEM_ICON_BASE + mIcon[1] + '.png', init); }
+
+    /* 技能图标：直连枫记 */
+    var mSIcon = full.match(/\/api\/v1\/buffs\/icons\/([0-9]+)/);
+    if (mSIcon) { return origFetch.call(this, SKILL_ICON_BASE + 'Skill.000.img.skill.' + mSIcon[1].padStart(7, '0') + '.icon.png', init); }
+
     /* 技能目录 */
     if (/\/api\/v1\/buffs\/skills(\?|$)/.test(full) || url === '/api/v1/buffs/skills') {
       var qs2 = {};
