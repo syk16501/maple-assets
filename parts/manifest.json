@@ -1,13 +1,13 @@
 {
- "ver": "8494d9255e3e",
+ "ver": "6e8971913b87",
  "shas": {
-  "html": "21a81c7e630b",
+  "html": "65bee2379d0d",
   "core": "0f8e5b4c70ea",
   "ui": "e06dbb8d128d",
   "guard": "c2a43f584679",
   "exp": "d48a92b08517",
   "buff": "dd7c0a42df2f",
-  "notify": "c4c348a26baa",
+  "notify": "0d172ef4b750",
   "drop": "66011481ecce"
  },
  "parts": [
