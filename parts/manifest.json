@@ -1,0 +1,24 @@
+{
+ "ver": "a8eacc0cafc0",
+ "shas": {
+  "html": "21a81c7e630b",
+  "core": "0f8e5b4c70ea",
+  "ui": "e06dbb8d128d",
+  "guard": "c2a43f584679",
+  "exp": "d48a92b08517",
+  "buff": "fc511960af54",
+  "notify": "c4c348a26baa",
+  "drop": "66011481ecce"
+ },
+ "parts": [
+  "html",
+  "core",
+  "ui",
+  "guard",
+  "exp",
+  "buff",
+  "notify",
+  "drop"
+ ],
+ "fmt": "iv12+tag16+ct"
+}
