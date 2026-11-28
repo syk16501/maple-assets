@@ -1,5 +1,5 @@
 {
- "ver": "6e8971913b87",
+ "ver": "755a80be6e5a",
  "shas": {
   "html": "65bee2379d0d",
   "core": "0f8e5b4c70ea",
@@ -8,7 +8,7 @@
   "exp": "d48a92b08517",
   "buff": "dd7c0a42df2f",
   "notify": "0d172ef4b750",
-  "drop": "66011481ecce"
+  "drop": "38e0b543752f"
  },
  "parts": [
   "html",
